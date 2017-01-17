@@ -1,4 +1,5 @@
 function Snake(){
+
     this.x = 0;
     this.y = 0;
 
@@ -8,7 +9,13 @@ function Snake(){
     this.xspeed = 0;
     this.yspeed = 1;
 
+    this.segmentsCount = 0;
+    this.tail = [createVector(this.x, this.y)];
+
     this.update = function(){
+        this.tail.push(createVector(this.x, this.y));
+        this.tail.shift();
+
         this.x += this.xspeed;
         this.y += this.yspeed;
 
@@ -18,6 +25,12 @@ function Snake(){
 
     this.show = function(SCALE){
         fill(255);
+
+        for(var i = 0; i <= this.segmentsCount-1; i++){
+            // console.log(this.tail[i]);
+            rect(this.tail[i].x, this.tail[i].y, SCALE, SCALE);
+        }
+
         rect(this.x, this.y, SCALE, SCALE);
     }
 
@@ -32,6 +45,12 @@ function Snake(){
 
     this.eat = function(thing){
         thing.destroy();
+        this.addTail();
+    }
+
+    this.addTail = function(){
+        this.tail.push(createVector(this.x, this.y));
+        this.segmentsCount++;
     }
 }
 
