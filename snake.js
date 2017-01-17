@@ -27,7 +27,11 @@ function Snake(){
     }
 
     this.speedUp = function(){
-        this.speed += 1;
+        this.speed += 0.1;
+    }
+
+    this.eat = function(thing){
+        thing.destroy();
     }
 }
 
@@ -38,6 +42,11 @@ function Food(x, y){
     this.show = function(){
         fill(255,0,0);
         rect(this.x, this.y, SCALE, SCALE);
+    }
+
+    this.destroy = function(){
+        this.x = getRandPosition();
+        this.y = getRandPosition();
     }
 }
 

@@ -9,12 +9,13 @@ function setup(){
 
 function draw(){
     background(51);
-    // snake.update();
+    snake.update();
     snake.show(SCALE);
     food.show();
-
-    if(snake.x === food.x && snake.y === food.y){
-        console.log('omnomnom');
+    if(collision(snake, food)){
+        console.log('omnom nom');
+        snake.eat(food);
+        snake.speedUp();
     }
 }
 
@@ -33,4 +34,9 @@ function keyPressed(){
             snake.dir(0,1);
             break;
     }
+}
+
+function collision(object1, object2){
+    distance = dist(object1.x, object1.y, object2.x, object2.y);
+    return distance < SCALE;
 }
