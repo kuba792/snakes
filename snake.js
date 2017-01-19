@@ -3,7 +3,6 @@ function Snake(){
     this.x = 0;
     this.y = 0;
 
-    this.scale = 10
     this.speed = 1;
 
     this.xspeed = 0;
@@ -27,7 +26,6 @@ function Snake(){
         fill(255);
 
         for(var i = 0; i <= this.segmentsCount-1; i++){
-            // console.log(this.tail[i]);
             rect(this.tail[i].x, this.tail[i].y, SCALE, SCALE);
         }
 
@@ -70,9 +68,5 @@ function Food(x, y){
 }
 
 function getRandPosition(){
-    return constrain(
-            Math.floor( 
-                ( Math.random() * GAMESIZE ) + 1 
-            )
-        , 0, GAMESIZE-SCALE);
+    return Math.floor( Math.random() * GAMESIZE/SCALE ) * SCALE;
 }
