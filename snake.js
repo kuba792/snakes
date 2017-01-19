@@ -35,15 +35,17 @@ function Snake(){
         } else return false;
     }
 
+    this.biteHisTail = function(){
+        var headPosition = createVector(this.x, this.y);
+        return inArray(snake.tail, headPosition);
+    }
+
     this.reset = function(){
         this.x = 0;
         this.y = 0;
-
         this.speed = SCALE;
-
         this.xspeed = 0 * this.speed;
         this.yspeed = 1 * this.speed;
-
         this.segmentsCount = 0;
         this.tail = [];
     }
@@ -52,7 +54,7 @@ function Snake(){
         this.xspeed = x * this.speed;
         this.yspeed = y * this.speed;
     }
-
+    
     this.speedUp = function(){
         this.speed += 0.1;
     }
@@ -85,4 +87,14 @@ function Food(x, y){
 
 function getRandPosition(){
     return Math.floor( Math.random() * GAMESIZE/SCALE ) * SCALE;
+}
+
+function inArray(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i].x === obj.x 
+        && a[i].y === obj.y) {
+            return true;
+        }
+    }
+    return false;
 }

@@ -12,7 +12,8 @@ function draw(){
     snake.update();
     snake.show();
     food.show();
-    if(snake.hitCorner()){
+    if(snake.hitCorner()
+    || snake.biteHisTail()){
         gameOver();
     }
     if(collision(snake, food)){
