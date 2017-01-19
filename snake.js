@@ -5,8 +5,8 @@ function Snake(){
 
     this.speed = SCALE;
 
-    this.xspeed = 0;
-    this.yspeed = 1;
+    this.xspeed = 1 * this.speed;
+    this.yspeed = 0 * this.speed;
 
     this.segmentsCount = 0;
     this.tail = [];
@@ -14,15 +14,11 @@ function Snake(){
     this.update = function(){
         this.tail.push(createVector(this.x, this.y));
         this.tail.shift();
-
         this.x += this.xspeed;
         this.y += this.yspeed;
-
-        this.x = constrain(this.x, 0, GAMESIZE-SCALE);
-        this.y = constrain(this.y, 0, GAMESIZE-SCALE);
     }
 
-    this.show = function(SCALE){
+    this.show = function(){
         fill(255);
 
         for(var i = 0; i <= this.segmentsCount-1; i++){
@@ -30,6 +26,26 @@ function Snake(){
         }
 
         rect(this.x, this.y, SCALE, SCALE);
+    }
+
+    this.hitCorner = function(){
+        if(snake.x < 0 || snake.x >= GAMESIZE 
+        || snake.y < 0 || snake.y >= GAMESIZE){
+            return true;
+        } else return false;
+    }
+
+    this.reset = function(){
+        this.x = 0;
+        this.y = 0;
+
+        this.speed = SCALE;
+
+        this.xspeed = 0 * this.speed;
+        this.yspeed = 1 * this.speed;
+
+        this.segmentsCount = 0;
+        this.tail = [];
     }
 
     this.dir = function(x, y){

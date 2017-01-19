@@ -10,12 +10,16 @@ function setup(){
 function draw(){
     background(51);
     snake.update();
-    snake.show(SCALE);
+    console.log(snake.x+' '+snake.y)
+    snake.show();
     food.show();
+    if(snake.hitCorner()){
+        gameOver();
+    }
     if(collision(snake, food)){
         console.log('omnom nom');
         snake.eat(food);
-        snake.speedUp();
+        // snake.speedUp();
     }
     frameRate(snake.speed);
 }
@@ -40,4 +44,9 @@ function keyPressed(){
 function collision(object1, object2){
     distance = dist(object1.x, object1.y, object2.x, object2.y);
     return distance < SCALE;
+}
+
+function gameOver(){
+    confirm('Game Over');
+    snake.reset();
 }
