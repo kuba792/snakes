@@ -10,7 +10,6 @@ function setup(){
 function draw(){
     background(51);
     snake.update();
-    console.log(snake.x+' '+snake.y)
     snake.show();
     food.show();
     if(snake.hitCorner()){
@@ -47,6 +46,6 @@ function collision(object1, object2){
 }
 
 function gameOver(){
-    confirm('Game Over');
+    var again = confirm("Game Over, \ntry again?");
     snake.reset();
 }
