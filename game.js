@@ -17,6 +17,7 @@ function draw(){
         snake.eat(food);
         snake.speedUp();
     }
+    frameRate(snake.speed);
 }
 
 function keyPressed(){

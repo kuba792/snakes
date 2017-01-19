@@ -3,13 +3,13 @@ function Snake(){
     this.x = 0;
     this.y = 0;
 
-    this.speed = 1;
+    this.speed = SCALE;
 
     this.xspeed = 0;
     this.yspeed = 1;
 
     this.segmentsCount = 0;
-    this.tail = [createVector(this.x, this.y)];
+    this.tail = [];
 
     this.update = function(){
         this.tail.push(createVector(this.x, this.y));
