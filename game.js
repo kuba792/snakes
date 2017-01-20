@@ -3,23 +3,26 @@ const GAMESIZE = 400;
 
 function setup(){
     createCanvas(GAMESIZE, GAMESIZE);
-    snake = new Snake();
+    snake = new Snake(255);
+    oponent = new Snake(200);
     food = new Food();
 }
 
 function draw(){
     background(51);
+
     snake.update();
-    snake.show();
+    oponent.update();
+    snake.show();    
+    oponent.show();
+
     food.show();
     if(snake.hitCorner()
     || snake.biteHisTail()){
         gameOver();
     }
     if(collision(snake, food)){
-        console.log('omnom nom');
         snake.eat(food);
-        // snake.speedUp();
     }
     frameRate(snake.speed);
 }
@@ -59,6 +62,6 @@ function collision(object1, object2){
 }
 
 function gameOver(){
-    var again = confirm("Game Over, \ntry again?");
     snake.reset();
+    oponent.reset();
 }
