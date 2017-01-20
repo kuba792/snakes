@@ -1,6 +1,8 @@
 const SCALE = 20;
 const GAMESIZE = 400;
 
+var socket = io();
+
 function setup(){
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
@@ -13,6 +15,7 @@ function draw(){
 
     snake.update();
     oponent.update();
+
     snake.show();    
     oponent.show();
 

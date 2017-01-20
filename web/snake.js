@@ -20,13 +20,15 @@ function Snake(color){
         this.tail.shift();
         this.x += this.xspeed;
         this.y += this.yspeed;
+
+        socket.emit('snake_move', this.exportToJSON() );
     }
 
     this.exportToJSON = function(){
         return {
             x: this.x,
             y: this.y,
-            tail: this.tail,
+            // tail: this.tail,
             segmentsCount: this.segmentsCount
         }
     }
