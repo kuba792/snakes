@@ -11,6 +11,8 @@ function Snake(){
     this.segmentsCount = 0;
     this.tail = [];
 
+    this.moveDirection = 'down';
+
     this.update = function(){
         this.tail.push(createVector(this.x, this.y));
         this.tail.shift();
@@ -48,13 +50,14 @@ function Snake(){
         this.yspeed = 1 * this.speed;
         this.segmentsCount = 0;
         this.tail = [];
+        this.moveDirection = 'down';
     }
 
     this.dir = function(x, y){
         this.xspeed = x * this.speed;
         this.yspeed = y * this.speed;
     }
-    
+
     this.speedUp = function(){
         this.speed += 0.1;
     }

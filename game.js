@@ -27,16 +27,28 @@ function draw(){
 function keyPressed(){
     switch(keyCode){
         case UP_ARROW:
-            snake.dir(0,-1);
+            if(snake.moveDirection != 'down'){
+                snake.dir(0,-1);
+                snake.moveDirection = 'up';
+            }
             break;
         case LEFT_ARROW:
-            snake.dir(-1,0);
+            if(snake.moveDirection != 'right'){
+                snake.dir(-1,0);
+                snake.moveDirection = 'left';
+            }
             break;
         case RIGHT_ARROW:
-            snake.dir(1,0);
+            if(snake.moveDirection != 'left'){
+                snake.dir(1,0);
+                snake.moveDirection = 'right';
+            }
             break;
         case DOWN_ARROW:
-            snake.dir(0,1);
+            if(snake.moveDirection != 'up'){
+                snake.dir(0,1);
+                snake.moveDirection = 'down';
+            }
             break;
     }
 }
