@@ -1,11 +1,25 @@
 {
   "name": "snakes_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "server for snakes",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kuba792",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuba792/snakes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kuba792/snakes/issues"
+  },
+  "homepage": "https://github.com/kuba792/snakes#readme"
 }
