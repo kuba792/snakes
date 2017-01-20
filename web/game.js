@@ -2,8 +2,10 @@ const SCALE = 20;
 const GAMESIZE = 400;
 
 var socket = io();
+var playerName = '';
 
 function setup(){
+    playerName = prompt("What's your name?", "player");
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
     oponent = new Snake(200);
