@@ -4,8 +4,12 @@ const GAMESIZE = 400;
 var socket = io();
 var playerName = '';
 
+var snake;
+var oponent;
+
 function setup(){
     playerName = prompt("What's your name?", "player");
+    socket.emit('myName', playerName);
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
     oponent = new Snake(200);
@@ -31,6 +35,10 @@ function draw(){
     }
     frameRate(snake.speed);
 }
+
+socket.on('oponent_position', function(data){
+    oponent.importFromJSON(data.position);
+});
 
 function keyPressed(){
     switch(keyCode){

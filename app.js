@@ -15,10 +15,24 @@ app.get('/game.js', function(req, res){
 });
 
 io.on('connection', function(socket){
+    var playerName = 'unknown';
     console.log('user connected..');
 
-    socket.on('snake_move', function(positions){
-        console.log(positions);
+    socket.on('myName', function(name){
+        playerName = name;
+    })
+
+    socket.on('snake_move', function(position){
+        console.log({
+                playerName: playerName,
+                position: position
+            });
+        socket.broadcast.emit( 'oponent_position',
+            {
+                playerName: playerName,
+                position: position
+            }
+        );
     });
 
     socket.on('disconnect', function(){
