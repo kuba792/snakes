@@ -2,6 +2,9 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+const SCALE = 20;
+const GAMESIZE = 400;
+
 app.get('/', function(req, res){
   res.sendFile( __dirname + '/web/index.html' );
 });
@@ -16,10 +19,11 @@ app.get('/game.js', function(req, res){
 
 io.on('connection', function(socket){
     var playerName = 'unknown';
-    console.log('user connected..');
-
+    var playerPoints = 0;
+    
     socket.on('myName', function(name){
         playerName = name;
+        console.log(playerName + ' connected..');
     });
 
     socket.on('snake_move', function(position){
@@ -31,12 +35,24 @@ io.on('connection', function(socket){
         );
     });
 
+    socket.on('destroy_food', function(){
+        console.log('generating new food: ');
+        socket.emit('food_new_position', getRandPosition());
+    });
+
     socket.on('disconnect', function(){
-        console.log('user disconnected.');
+        console.log(playerName + ' disconnected.');
     });
 
 });
 
-http.listen(80, function(){
+http.listen(8080, function(){
   console.log('listening on *:3000');
 });
+
+function getRandPosition(){
+    return [
+        Math.floor( Math.random() * GAMESIZE/SCALE ) * SCALE,
+        Math.floor( Math.random() * GAMESIZE/SCALE ) * SCALE
+    ];
+}

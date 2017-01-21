@@ -94,9 +94,7 @@ function Snake(color){
     }
 }
 
-function Food(x, y){
-    this.x = x ? x:getRandPosition();
-    this.y = y ? y:getRandPosition();
+function Food(){
 
     this.show = function(){
         fill(255,0,0);
@@ -104,8 +102,12 @@ function Food(x, y){
     }
 
     this.destroy = function(){
-        this.x = getRandPosition();
-        this.y = getRandPosition();
+        socket.emit('destroy_food');
+    }
+
+    this.setPosition = function(x,y){
+        this.x = x;
+        this.y = y;
     }
 }
 

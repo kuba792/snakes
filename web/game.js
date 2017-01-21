@@ -14,6 +14,7 @@ function setup(){
     snake = new Snake(255);
     oponent = new Snake(200);
     food = new Food();
+    food.setPosition(50,50);
 }
 
 function draw(){
@@ -42,6 +43,11 @@ function draw(){
 
 socket.on('oponent_position', function(data){
     oponent.importFromJSON(data.position);
+});
+
+socket.on('food_new_position', function(data){
+    food.setPosition(data[0], data[1]);
+    console.log('nom');
 });
 
 function keyPressed(){
