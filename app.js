@@ -23,10 +23,6 @@ io.on('connection', function(socket){
     });
 
     socket.on('snake_move', function(position){
-        console.log({
-                playerName: playerName,
-                position: position
-            });
         socket.broadcast.emit( 'oponent_position',
             {
                 playerName: playerName,

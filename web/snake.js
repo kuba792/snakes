@@ -16,7 +16,7 @@ function Snake(color){
     this.moveDirection = 'down';
 
     this.update = function(){
-        this.tail.push(createVector(this.x, this.y));
+        this.tail.push([this.x, this.y]);
         this.tail.shift();
         this.x += this.xspeed;
         this.y += this.yspeed;
@@ -28,7 +28,7 @@ function Snake(color){
         return {
             x: this.x,
             y: this.y,
-            // tail: this.tail,
+            tail: this.tail,
             segmentsCount: this.segmentsCount
         }
     }
@@ -44,7 +44,7 @@ function Snake(color){
         fill(this.color);
 
         for(var i = 0; i <= this.segmentsCount-1; i++){
-            rect(this.tail[i].x, this.tail[i].y, SCALE, SCALE);
+            rect(this.tail[i][0], this.tail[i][1], SCALE, SCALE);
         }
 
         rect(this.x, this.y, SCALE, SCALE);
@@ -58,9 +58,15 @@ function Snake(color){
     }
 
     this.biteHisTail = function(){
-        var headPosition = createVector(this.x, this.y);
+        var headPosition = [this.x, this.y];
         return inArray(snake.tail, headPosition);
     }
+    
+    this.addTail = function(){
+        this.tail.push([this.x, this.y]);
+        this.segmentsCount++;
+    }
+
 
     this.reset = function(){
         this.x = 0;
@@ -109,8 +115,8 @@ function getRandPosition(){
 
 function inArray(a, obj) {
     for (var i = 0; i < a.length; i++) {
-        if (a[i].x === obj.x 
-        && a[i].y === obj.y) {
+        if (a[i][0]=== obj.x 
+        && a[i][1]=== obj.y) {
             return true;
         }
     }
