@@ -5,30 +5,27 @@ var socket = io();
 var playerName = '';
 
 var snake;
-var oponent;
+var oponents = [];
 
 function setup(){
     playerName = prompt("What's your name?", "player");
     socket.emit('myName', playerName);
     createCanvas(GAMESIZE, GAMESIZE);
-    snake = new Snake(255);
-    oponent = new Snake(200);
+    snake = new Snake(0, playerName, 255);
     food = new Food();
     food.setPosition(50,50);
 }
 
 function draw(){
 
-    socket.on('new_player', function(){
-        snake.reset();
-    });
-
     background(51);
 
     snake.update();
+    snake.show();  
 
-    snake.show();    
-    oponent.show();
+    oponents.forEach(function(oponent){
+        oponent.show();
+    });
 
     food.show();
     if(snake.hitCorner()
@@ -41,13 +38,22 @@ function draw(){
     frameRate(snake.speed);
 }
 
+socket.on('your_id', function(id){
+    snake.id = id;
+});
+
+socket.on('new_player', function(data){
+    console.log(data.id+' joined the game');
+    oponents[data.id] = new Snake(data.id, data.name);
+});
+
 socket.on('oponent_position', function(data){
-    oponent.importFromJSON(data.position);
+    console.log(data.playerId);
+    oponents[data.playerId].importFromJSON(data);
 });
 
 socket.on('food_new_position', function(data){
     food.setPosition(data[0], data[1]);
-    console.log('nom');
 });
 
 function keyPressed(){

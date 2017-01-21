@@ -5,6 +5,8 @@ var io = require('socket.io')(http);
 const SCALE = 20;
 const GAMESIZE = 400;
 
+var numberOfPlayers = 0;
+
 app.get('/', function(req, res){
   res.sendFile( __dirname + '/web/index.html' );
 });
@@ -19,20 +21,19 @@ app.get('/game.js', function(req, res){
 
 io.on('connection', function(socket){
     var playerName = 'unknown';
+    var playerId;
     var playerPoints = 0;
     
     socket.on('myName', function(name){
         playerName = name;
-        console.log(playerName + ' connected..');
+        playerId = ++numberOfPlayers;
+        socket.broadcast.emit('new_player', {name: playerName, id: playerId});
+        socket.emit('your_id', playerId);
+        console.log(playerName + 'with id:' + playerId + ' connected..');
     });
 
     socket.on('snake_move', function(position){
-        socket.broadcast.emit( 'oponent_position',
-            {
-                playerName: playerName,
-                position: position
-            }
-        );
+        socket.broadcast.emit( 'oponent_position', position);
     });
 
     socket.on('destroy_food', function(){
@@ -47,7 +48,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(8080, function(){
-  console.log('listening on *:3000');
+  console.log('listening on *:8080');
 });
 
 function getRandPosition(){

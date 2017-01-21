@@ -1,9 +1,12 @@
-function Snake(color){
+function Snake(id, name, color){
+
+    this.name = name? name : 'unknown';
+    this.id = id;
 
     this.x = 0;
     this.y = 0;
 
-    this.color = color;
+    this.color = color? color : 150;
 
     this.speed = SCALE;
 
@@ -22,10 +25,12 @@ function Snake(color){
         this.y += this.yspeed;
 
         socket.emit('snake_move', this.exportToJSON() );
+        // console.log(this.exportToJSON());
     }
 
     this.exportToJSON = function(){
         return {
+            playerId: this.id,
             x: this.x,
             y: this.y,
             tail: this.tail,
