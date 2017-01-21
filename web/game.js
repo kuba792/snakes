@@ -25,7 +25,6 @@ function draw(){
     background(51);
 
     snake.update();
-    // oponent.update();
 
     snake.show();    
     oponent.show();

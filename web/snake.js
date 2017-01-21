@@ -86,11 +86,6 @@ function Snake(color){
         thing.destroy();
         this.addTail();
     }
-
-    this.addTail = function(){
-        this.tail.push(createVector(this.x, this.y));
-        this.segmentsCount++;
-    }
 }
 
 function Food(x, y){
