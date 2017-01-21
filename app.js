@@ -37,7 +37,7 @@ io.on('connection', function(socket){
 
     socket.on('destroy_food', function(){
         console.log('generating new food: ');
-        socket.emit('food_new_position', getRandPosition());
+        io.emit('food_new_position', getRandPosition());
     });
 
     socket.on('disconnect', function(){
