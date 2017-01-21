@@ -17,10 +17,15 @@ function setup(){
 }
 
 function draw(){
+
+    socket.on('new_player', function(){
+        snake.reset();
+    });
+
     background(51);
 
     snake.update();
-    oponent.update();
+    // oponent.update();
 
     snake.show();    
     oponent.show();
@@ -76,5 +81,4 @@ function collision(object1, object2){
 
 function gameOver(){
     snake.reset();
-    oponent.reset();
 }

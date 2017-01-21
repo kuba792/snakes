@@ -20,7 +20,7 @@ io.on('connection', function(socket){
 
     socket.on('myName', function(name){
         playerName = name;
-    })
+    });
 
     socket.on('snake_move', function(position){
         console.log({
