@@ -1,11 +1,13 @@
-const SCALE = 20;
-const GAMESIZE = 400;
+const SCALE = 15;
+const GAMESIZE = 700;
 
 var socket = io();
 var playerName = '';
 
 var snake;
 var oponent;
+
+var messageTxt = '';
 
 function setup(){
     playerName = prompt("What's your name?", "player");
@@ -14,16 +16,20 @@ function setup(){
     snake = new Snake(255);
     oponent = new Snake(200);
     food = new Food();
-    food.setPosition(50,50);
+    food.setPosition(0,0);
 }
 
 function draw(){
 
-    socket.on('new_player', function(){
+    socket.on('new_player', function(data){
         snake.reset();
+        message(data.playerName + " joined the game.")
     });
 
     background(51);
+
+    fill(255);
+    text(messageTxt, 15, GAMESIZE/2);
 
     snake.update();
 
@@ -86,4 +92,8 @@ function collision(object1, object2){
 
 function gameOver(){
     snake.reset();
+}
+
+function message(text){
+    messageTxt = text;
 }
