@@ -11,6 +11,7 @@ var messageTxt = '';
 
 function setup(){
     playerName = prompt("What's your name?", "player");
+    $.notify("Hello " + playerName, "success");
     socket.emit('myName', playerName);
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
@@ -20,19 +21,9 @@ function setup(){
 }
 
 function draw(){
-
-    socket.on('new_player', function(data){
-        snake.reset();
-        message(data.playerName + " joined the game.")
-    });
-
     background(51);
 
-    fill(255);
-    text(messageTxt, 15, GAMESIZE/2);
-
     snake.update();
-
     snake.show();    
     oponent.show();
 
@@ -53,7 +44,11 @@ socket.on('oponent_position', function(data){
 
 socket.on('food_new_position', function(data){
     food.setPosition(data[0], data[1]);
-    console.log('nom');
+});
+
+socket.on('new_player', function(playerName){
+    snake.reset();
+    $.notify(playerName + " joined the game.", 'info')
 });
 
 function keyPressed(){
@@ -92,8 +87,4 @@ function collision(object1, object2){
 
 function gameOver(){
     snake.reset();
-}
-
-function message(text){
-    messageTxt = text;
 }

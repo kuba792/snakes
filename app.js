@@ -13,6 +13,10 @@ app.get('/snake.js', function(req, res){
   res.sendFile( __dirname + '/web/snake.js' );
 });
 
+app.get('/notify.js', function(req, res){
+  res.sendFile( __dirname + '/web/notify.js' );
+});
+
 app.get('/game.js', function(req, res){
   res.sendFile( __dirname + '/web/game.js' );
 });
@@ -26,11 +30,7 @@ io.on('connection', function(socket){
         console.log(playerName + ' connected..');
         console.log('generating new food: ');
         io.emit('food_new_position', getRandPosition());
-        socket.broadcast.emit('new_player',
-            {
-                playerName: playerName
-            }
-        );
+        socket.broadcast.emit('new_player', playerName);
     });
 
     socket.on('snake_move', function(position){
