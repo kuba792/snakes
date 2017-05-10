@@ -5,7 +5,7 @@ var socket = io();
 var playerName = '';
 
 var snake;
-var oponent;
+var oponent = [];
 
 var messageTxt = '';
 
@@ -15,7 +15,6 @@ function setup(){
     socket.emit('myName', playerName);
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
-    oponent = new Snake(200);
     food = new Food();
     food.setPosition(0,0);
 }
@@ -39,7 +38,7 @@ function draw(){
 }
 
 socket.on('oponent_position', function(data){
-    oponent.importFromJSON(data.position);
+    oponent[data.playerName].importFromJSON(data.position);
 });
 
 socket.on('food_new_position', function(data){
@@ -48,7 +47,8 @@ socket.on('food_new_position', function(data){
 
 socket.on('new_player', function(playerName){
     snake.reset();
-    $.notify(playerName + " joined the game.", 'info')
+    $.notify(playerName + " joined the game.", 'info');
+    oponent[playerName] = new Snake(200);
 });
 
 function keyPressed(){
