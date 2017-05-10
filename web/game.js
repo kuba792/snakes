@@ -23,8 +23,7 @@ function draw(){
     background(51);
 
     snake.update();
-    snake.show();    
-    oponent.show();
+    snake.show();  
 
     food.show();
     if(snake.hitCorner()
@@ -38,7 +37,12 @@ function draw(){
 }
 
 socket.on('oponent_position', function(data){
+    if(oponent[data.playerName] === undefined){
+        oponent[data.playerName] = new Snake();
+    }
+    var newOponent = oponent[data.playerName];
     oponent[data.playerName].importFromJSON(data.position);
+    oponent[data.playerName].show();
 });
 
 socket.on('food_new_position', function(data){
@@ -48,7 +52,7 @@ socket.on('food_new_position', function(data){
 socket.on('new_player', function(playerName){
     snake.reset();
     $.notify(playerName + " joined the game.", 'info');
-    oponent[playerName] = new Snake(200);
+    oponent[playerName] = new Snake();
 });
 
 function keyPressed(){

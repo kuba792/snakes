@@ -3,7 +3,7 @@ function Snake(color){
     this.x = 0;
     this.y = 0;
 
-    this.color = color;
+    this.color = color || getRandColor();
 
     this.speed = SCALE;
 
@@ -123,4 +123,8 @@ function inArray(a, obj) {
         }
     }
     return false;
+}
+
+function getRandColor(){
+    return parseInt(Math.floor(Math.random() * (250 - 70)) + 70);
 }
