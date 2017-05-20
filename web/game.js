@@ -1,5 +1,5 @@
 const SCALE = 15;
-const GAMESIZE = 700;
+const GAMESIZE = 675;
 
 var socket = io();
 var playerName = '';
