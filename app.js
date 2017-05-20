@@ -2,8 +2,15 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+/*
+ *  - inne kolory graczy
+ *  - naprawić cofkę
+ *  - ugryzienie w ogon
+ *  - punktacja na bierząco
+ */
+
 const SCALE = 15;
-const GAMESIZE = 700;
+const GAMESIZE = 675;
 
 app.get('/', function(req, res){
   res.sendFile( __dirname + '/web/index.html' );
