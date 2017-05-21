@@ -44,7 +44,7 @@ socket.on('oponent_position', function(data){
         oponent[data.playerName] = new Snake();
     }
     var newOponent = oponent[data.playerName];
-    oponent[data.playerName].importFromJSON(data.position);
+    oponent[data.playerName].importFromJSON(data.position, data.playerPoints);
 });
 
 socket.on('food_new_position', function(data){

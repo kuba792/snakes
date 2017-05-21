@@ -13,6 +13,8 @@ function Snake(color){
     this.segmentsCount = 0;
     this.tail = [];
 
+    this.points = 0;
+
     this.moveDirection = 'down';
 
     this.update = function(){
@@ -33,11 +35,12 @@ function Snake(color){
         }
     }
 
-    this.importFromJSON = function(data){
+    this.importFromJSON = function(data, points){
         this.x = data.x;
         this.y = data.y;
         this.tail = data.tail;
         this.segmentsCount = data.segmentsCount;
+        this.points = points;
     }
 
     this.show = function(){
