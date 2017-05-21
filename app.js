@@ -44,13 +44,15 @@ io.on('connection', function(socket){
         socket.broadcast.emit( 'oponent_position',
             {
                 playerName: playerName,
-                position: position
+                position: position,
+                playerPoints: playerPoints
             }
         );
     });
 
     socket.on('destroy_food', function(){
         console.log('generating new food: ');
+        playerPoints++;
         io.emit('food_new_position', getRandPosition());
     });
 
