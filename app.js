@@ -57,6 +57,9 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect', function(){
+        // @TODO: if there are more players with the same name,
+        // disconnect only one of them
+        io.emit('player_disconnected', playerName);
         console.log(playerName + ' disconnected.');
     });
 

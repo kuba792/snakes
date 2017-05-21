@@ -56,6 +56,12 @@ socket.on('new_player', function(playerName){
     oponent[playerName] = new Snake();
 });
 
+// @TODO: if there are more players with the same name,
+// disconnect only one of them
+socket.on('player_disconnected', function(playerName){
+    delete oponent[playerName];
+});
+
 function keyPressed(){
     switch(keyCode){
         case UP_ARROW:
