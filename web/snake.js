@@ -126,5 +126,5 @@ function inArray(a, obj) {
 }
 
 function getRandColor(){
-    return parseInt(Math.floor(Math.random() * (250 - 70)) + 70);
+    return 150;
 }
