@@ -50,7 +50,6 @@ socket.on('food_new_position', function(data){
 });
 
 socket.on('new_player', function(playerName){
-    snake.reset();
     $.notify(playerName + " joined the game.", 'info');
     oponent[playerName] = new Snake();
 });
