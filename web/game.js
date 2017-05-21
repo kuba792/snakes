@@ -25,6 +25,10 @@ function draw(){
     snake.update();
     snake.show();  
 
+    for (var player in oponent) {
+        oponent[player].show();
+    }
+
     food.show();
     if(snake.hitCorner()
     || snake.biteHisTail()){
@@ -42,7 +46,6 @@ socket.on('oponent_position', function(data){
     }
     var newOponent = oponent[data.playerName];
     oponent[data.playerName].importFromJSON(data.position);
-    oponent[data.playerName].show();
 });
 
 socket.on('food_new_position', function(data){
