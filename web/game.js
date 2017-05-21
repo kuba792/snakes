@@ -16,7 +16,6 @@ function setup(){
     createCanvas(GAMESIZE, GAMESIZE);
     snake = new Snake(255);
     food = new Food();
-    food.setPosition(0,0);
 }
 
 function draw(){
