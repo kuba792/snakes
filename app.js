@@ -57,6 +57,10 @@ io.on('connection', function(socket){
         console.log(playerName + ' scored, now ' + playerPoints)
     });
 
+    socket.on('snake_die', function(){
+        playerPoints = 0;
+    });
+
     socket.on('disconnect', function(){
         // @TODO: if there are more players with the same name,
         // disconnect only one of them

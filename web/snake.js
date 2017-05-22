@@ -80,6 +80,7 @@ function Snake(color){
         this.segmentsCount = 0;
         this.tail = [];
         this.moveDirection = 'down';
+        this.points = 0;
     }
 
     this.dir = function(x, y){

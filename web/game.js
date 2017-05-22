@@ -108,7 +108,9 @@ function collision(object1, object2){
 }
 
 function gameOver(){
+    socket.emit('snake_die');
     snake.reset();
+    setScoreTable(0, playerName);
 }
 
 function setScoreTable(points, playerName){
