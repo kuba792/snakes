@@ -65,24 +65,28 @@ socket.on('player_disconnected', function(playerName){
 function keyPressed(){
     switch(keyCode){
         case UP_ARROW:
+        case 87: // W
             if(snake.moveDirection != 'down'){
                 snake.dir(0,-1);
                 snake.moveDirection = 'up';
             }
             break;
         case LEFT_ARROW:
+        case 65: // A
             if(snake.moveDirection != 'right'){
                 snake.dir(-1,0);
                 snake.moveDirection = 'left';
             }
             break;
         case RIGHT_ARROW:
+        case 68: // D
             if(snake.moveDirection != 'left'){
                 snake.dir(1,0);
                 snake.moveDirection = 'right';
             }
             break;
         case DOWN_ARROW:
+        case 83: // S
             if(snake.moveDirection != 'up'){
                 snake.dir(0,1);
                 snake.moveDirection = 'down';
