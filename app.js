@@ -54,6 +54,7 @@ io.on('connection', function(socket){
         console.log('generating new food: ');
         playerPoints++;
         io.emit('food_new_position', getRandPosition());
+        console.log(playerName + ' scored, now ' + playerPoints)
     });
 
     socket.on('disconnect', function(){
